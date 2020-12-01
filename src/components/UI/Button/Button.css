@@ -1,0 +1,21 @@
+.Button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #06d6a0;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: background-color .5s;
+}
+
+.Button:enabled:hover {
+    background-color: #44eec1;
+}
+
+.Button:disabled {
+    background-color: #d8e2dc;
+    cursor: not-allowed;
+}
