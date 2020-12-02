@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
@@ -120,26 +121,34 @@ class Auth extends Component {
 
     render() {
         return (
-            <div className={classes.Auth}>
-                <div>
-                    <form onSubmit={this.onSubmitHandler}>
-                        <h1>Sign in</h1>
-                        {
-                            this.props.isError
-                                ? <span>Wrong username/password</span>
-                                : null
-                        }
-                        {this.renderInput()}
-                        {this.renderButton()}
-                    </form>
+            <Fragment>
+                <div className={classes.Auth}>
+                    <div>
+                        <form onSubmit={this.onSubmitHandler}>
+                            <h1>Sign in</h1>
+                            {
+                                this.props.isError
+                                    ? <span className={classes.error}>Wrong username/password</span>
+                                    : null
+                            }
+                            {this.renderInput()}
+                            {this.renderButton()}
+                        </form>
+                    </div>
                 </div>
-            </div>
+                {
+                    this.props.success
+                        ? <Redirect to={'/users'} />
+                        : null
+                }
+            </Fragment>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
+        success: state.auth.success,
         isError: state.auth.isError
     }
 }

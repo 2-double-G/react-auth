@@ -1,0 +1,8 @@
+.Users {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f0e6ef;
+}
+

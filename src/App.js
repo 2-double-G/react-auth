@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Auth from './containers/Auth/Auth';
 import Layout from './hoc/Layout/Layout';
-
+import Users from './containers/Users/Users';
 
 class App extends Component {
   render() {
     return (
       <Layout>
         <Switch>
-          <Route path={'/auth'} component={ Auth }/>
-          <Route path={'/'} component={ Auth }/>
+          <Route path={'/users'} component={Users}/>
+          <Route path={'/login'} component={Auth} />
+          <Redirect from={'/'} to={'/login'}/>
         </Switch>
       </Layout>
     );

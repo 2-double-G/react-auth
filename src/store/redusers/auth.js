@@ -3,7 +3,8 @@ import { AUTH_ERROR, AUTH_SUCCESS } from './../actions/actionTypes';
 
 const initialState = {
     token: null,
-    isError: false
+    success: false,
+    isError: false,
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -11,11 +12,14 @@ export const authReducer = (state = initialState, action) => {
         case AUTH_SUCCESS:
             return {
                 ...state,
-                token: action.token
+                token: action.token,
+                success: true,
+                isError: false
             } 
         case AUTH_ERROR:
             return {
                 ...state,
+                success: false,
                 isError: true
             }
         default:
