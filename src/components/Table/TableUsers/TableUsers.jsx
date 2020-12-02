@@ -1,22 +1,29 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-
 import { EnhancedTableHead } from '../TableHead/TableHead';
 import { EnhancedTableRow } from '../TableRow/TableRow';
 
+import { ThemeProvider } from '@material-ui/core'
+import { createMuiTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { users } from './../../../store/actions/users';
 import { filter } from './../../../store/actions/filter';
 
-class TableUsers extends Component {
+const theme = createMuiTheme({
+  overrides: {
+      MuiTableCell: {
+          root: {  
+            padding: '5px 10px',
+            boxSizing: 'border-box'
+          },
+    }
+  },
+});
 
-  componentDidMount() {
-      this.props.users();
-  }
+class TableUsers extends Component {
 
   sortClickHandler = () => {
     const order = this.props.order === 'asc' ? 'desc' : 'asc';
@@ -25,7 +32,7 @@ class TableUsers extends Component {
 
     render() {
 
-      const sorted = this.props.usersData.sort((a, b) => {
+      const sorted = this.props.userss.sort((a, b) => {
         if (a.id < b.id)
           return this.props.order === 'asc' ? -1 : 1
         if (a.id > b.id)
@@ -34,17 +41,15 @@ class TableUsers extends Component {
       })
 
       return (
-        <Fragment>
-          {this.props.loading
-            ? <CircularProgress />
-            : <TableContainer >
+        <ThemeProvider theme={theme}>
+          <TableContainer style={{borderRadius: 10}}>
               <Table
                 aria-label="collapsible table"
-                style={{ maxWidth: 550, overflow: 'hidden', width: '100%', borderRadius: 15, margin: '0 auto'}}
+                style={{ minWidth: 420, width: '100%', margin: '0 auto'}}
               >
                 <EnhancedTableHead
                   order={this.props.order}
-                  tableHead={this.props.usersData[0]}
+                  tableHead={this.props.userss[0]}
                   onClick={() => this.sortClickHandler()}
                 />
                 <TableBody style={{background: '#fff'}}>
@@ -56,8 +61,7 @@ class TableUsers extends Component {
                 </TableBody>
               </Table>
             </TableContainer>
-          }
-        </Fragment>
+        </ThemeProvider>
       );
     }
 }

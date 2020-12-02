@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
     AUTH_SUCCESS,
-    AUTH_ERROR
+    AUTH_ERROR,
+    LOGOUT
 } from './actionTypes';
 
 

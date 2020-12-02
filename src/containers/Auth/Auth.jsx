@@ -137,7 +137,7 @@ class Auth extends Component {
                     </div>
                 </div>
                 {
-                    this.props.success
+                    this.props.token
                         ? <Redirect to={'/users'} />
                         : null
                 }
@@ -148,7 +148,7 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
     return {
-        success: state.auth.success,
+        token: state.auth.token,
         isError: state.auth.isError
     }
 }

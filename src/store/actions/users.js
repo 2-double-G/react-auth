@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {
-    FETCH_USERS_SUCCESS
+    FETCH_USERS_START,
+    FETCH_USERS_SUCCESS,
+    LOGOUT
 } from "./actionTypes";
 
 
@@ -9,6 +11,8 @@ export const users = () => {
 
         const url = 'http://emphasoft-test-assignment.herokuapp.com/api/v1/users/';
         const token = localStorage.getItem('token');
+
+        dispatch(fetchUserStart());
 
         try {
             const response = await axios.get(url, {headers: {
@@ -33,16 +37,31 @@ export const users = () => {
                 })
             })
             
-            dispatch(userSucsess(prepareData))
+            dispatch(fetchUserSucsess(prepareData, token))
         } catch (error) {
             console.log('error');           
         }
     }
 }
 
-export const userSucsess = (data) => {
+export const fetchUserStart = () => {
+    return {
+        type: FETCH_USERS_START
+    }
+}
+
+export const fetchUserSucsess = (data, token) => {
     return {
         type: FETCH_USERS_SUCCESS,
-        data
+        data,
+        token
+    }
+}
+
+
+export const logout = () => {
+    localStorage.removeItem('token');
+    return {
+        type: LOGOUT
     }
 }

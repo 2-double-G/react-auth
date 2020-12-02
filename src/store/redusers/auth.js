@@ -1,5 +1,5 @@
 
-import { AUTH_ERROR, AUTH_SUCCESS } from './../actions/actionTypes';
+import { AUTH_ERROR, AUTH_SUCCESS, LOGOUT } from './../actions/actionTypes';
 
 const initialState = {
     token: null,

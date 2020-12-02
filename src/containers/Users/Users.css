@@ -3,11 +3,16 @@
     flex-grow: 1;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
     background-color: #f0e6ef;
     padding: 20px;
 }
 
-.Users > div {
+.Users > div > div {
     display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.Users button {
+    margin-bottom: 20px
 }
