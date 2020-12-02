@@ -32,22 +32,22 @@ export const EnhancedTableRow = props => {
       <TableRow className={classes.root}>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
         </TableCell>
         {
           rowItems.slice(0, -1).map((item, index) => {
-                return (
-                    <TableCell
-                        key={index}
-                        align="right"
-                        component={item === 'id' ? 'th' : 'td'}
-                        scope={item === 'id' ? 'row' : null}
-                    >
-                        {`${row[item]}`}
-                    </TableCell>
-                )
-            })
+            return (
+              <TableCell
+                key={index}
+                align="right"
+                component={item === 'id' ? 'th' : 'td'}
+                scope={item === 'id' ? 'row' : null}
+              >
+                {`${row[item]}`}
+              </TableCell>
+            )
+          })
         }
       </TableRow>
       <TableRow>
@@ -60,17 +60,17 @@ export const EnhancedTableRow = props => {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                      {
-                        Object.keys(row.detail).map((item, index) => {
-                          return (                                                   
-                            <TableCell
-                              key={index}
-                            >
-                              {item}
-                            </TableCell>
-                          )
-                        })
-                      }
+                    {
+                      Object.keys(row.detail).map((item, index) => {
+                        return (                                                   
+                          <TableCell
+                            key={index}
+                          >
+                            {item}
+                          </TableCell>
+                        )
+                      })
+                    }
                       </TableRow>
                   </TableHead>
                 <TableBody>

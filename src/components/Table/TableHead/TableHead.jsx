@@ -6,34 +6,36 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 
 export const EnhancedTableHead = props => {
-    const headNames = Object.keys(props.tableHead);
+  const headNames = Object.keys(props.tableHead);
 
-    return (
-        <TableHead style={{backgroundColor: '#9c89b8'}}>
-            <TableRow>
-                <TableCell />
+  return (
+    <TableHead style={{backgroundColor: '#9c89b8'}}>
+      <TableRow>
+        <TableCell />
+        {
+          headNames.slice(0, -1).map((name, index) => {
+            return (
+              <TableCell
+                key={index}
+                style={{ color: '#fff' }}
+                align="right"
+              >
+                {name}
                 {
-                    headNames.slice(0, -1).map((name, index) => {
-                        return (<TableCell
-                            key={index}
-                            style={{ color: '#fff' }}
-                            align="right"
-                        >
-                            {name}
-                            {
-                                name === 'id'
-                                ? <TableSortLabel
-                                    active={true}
-                                    direction={props.order}
-                                    onClick={props.onClick}
-                                  >
-                                  </TableSortLabel>
-                                : null
-                            }
-                        </TableCell>)
-                    })
+                  name === 'id'
+                  ? <TableSortLabel
+                    active={true}
+                    direction={props.order}
+                    onClick={props.onClick}
+                    >
+                    </TableSortLabel>
+                  : null
                 }
-            </TableRow>
-        </TableHead>
-    )
+              </TableCell>
+            )
+          })
+        }
+      </TableRow>
+    </TableHead>
+  )
 }

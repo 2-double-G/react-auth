@@ -5,8 +5,8 @@ import { searchReducer } from './search';
 import { filterReducer } from './filter';
 
 export const rootReducer = combineReducers({
-    auth: authReducer,
-    users: usersReducer,
-    search: searchReducer,
-    filter: filterReducer
+  auth: authReducer,
+  users: usersReducer,
+  search: searchReducer,
+  filter: filterReducer
 });

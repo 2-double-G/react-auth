@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import classes from './Users.css';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import classes from './Users.css';
+
 import TableUsers from './../../components/Table/TableUsers/TableUsers';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+
 import { search } from './../../store/actions/search';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { logout } from '../../store/actions/users';
-import { users } from './../../store/actions/users';
+import { users, logout } from '../../store/actions/users';
 
 class Users extends Component {
 
@@ -16,7 +19,7 @@ class Users extends Component {
     this.props.users();
   }
 
-  onChangeHandler = (event) => {
+  onChangeHandler = event => {
     this.props.search(event.target.value);
   }
 
@@ -26,36 +29,35 @@ class Users extends Component {
 
     render() {
       return (
-          <div className={classes.Users}>     
-            {
-              this.props.loading
-                ? <CircularProgress />
-                : <div>
-                    <div>
-                    <Input
-                        label='Search username'
-                        value={this.props.serachName}
-                        onChange={this.onChangeHandler}
-                      />
-                      <Button
-                        onClick={() => this.logoutHandler()}
-                      >
-                        logout
-                      </Button>
-                    </div>
-                  <TableUsers
-                    searchName={this.props.serachName}
-                    userss={this.props.usersData}
-                  />  
-                  
-                  {
-                    !this.props.token 
-                      ? <Redirect to={'/login'} />
-                      : null
-                  }
-                </div>
-              }        
-            </div>
+        <div className={classes.Users}>     
+          {
+            this.props.loading
+              ? <CircularProgress />
+              : <div>
+                  <div>
+                  <Input
+                      label='Search username'
+                      value={this.props.serachName}
+                      onChange={this.onChangeHandler}
+                    />
+                    <Button
+                      onClick={() => this.logoutHandler()}
+                    >
+                      logout
+                    </Button>
+                  </div>
+                <TableUsers
+                  searchName={this.props.serachName}
+                  userss={this.props.usersData}
+                />                
+                {
+                  !this.props.token 
+                    ? <Redirect to={'/login'} />
+                    : null
+                }
+              </div>
+            }        
+          </div>
       )
     }
 }
@@ -72,8 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     users: () => dispatch(users()),
-    search: name => dispatch(search(name)),
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    search: name => dispatch(search(name))
   }
 }
 

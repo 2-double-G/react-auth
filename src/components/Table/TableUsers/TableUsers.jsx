@@ -14,12 +14,12 @@ import { filter } from './../../../store/actions/filter';
 
 const theme = createMuiTheme({
   overrides: {
-      MuiTableCell: {
-          root: {  
-            padding: '5px 10px',
-            boxSizing: 'border-box'
-          },
-    }
+    MuiTableCell: {
+      root: {  
+        padding: '5px 10px',
+        boxSizing: 'border-box'
+      },
+    },
   },
 });
 
