@@ -18,7 +18,7 @@ export const auth = (username, password) => {
             const data = response.data;
 
             localStorage.setItem('token', data.token);
-            console.log(response);
+
             dispatch(authSuccess(data.token))
         } catch (error) {
             console.log('error in auth');

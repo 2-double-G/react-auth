@@ -1,73 +1,55 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
+
 import { EnhancedTableHead } from '../TableHead/TableHead';
 import { EnhancedTableRow } from '../TableRow/TableRow';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
-import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { users } from './../../../store/actions/users';
+import { filter } from './../../../store/actions/filter';
 
 class TableUsers extends Component {
 
-    state = {
-        order: 'asc', 
-        orderBy: 'id',
-        search: ''
-    }
+  componentDidMount() {
+      this.props.users();
+  }
 
-    componentDidMount() {
-        this.props.users();
-    }    
+  sortClickHandler = () => {
+    const order = this.props.order === 'asc' ? 'desc' : 'asc';
+    this.props.filter(order);
+  }
 
-    sortClickHandler = (event) => {
-        const order = this.state.order === 'asc' ? 'desc' : 'asc';
-
-        this.setState({
-            order
-        })
-    }
-
-    sortedData = (arr) => {
-        const copy = arr.map(item => { return item });
-        
-        return [].slice.call(copy).sort((a, b) => {
-            if (a.id < b.id)
-                return this.state.order === 'asc' ? -1 : 1
-            if (a.id > b.id)
-                return this.state.order === 'asc' ? 1 : -1
-            return 0
-        })
-    }
-
-    handleInputChange = (event) => {
-        this.setState({
-            search: event.target.value
-        })
-    }
-    
     render() {
+
+      const sorted = this.props.usersData.sort((a, b) => {
+        if (a.id < b.id)
+          return this.props.order === 'asc' ? -1 : 1
+        if (a.id > b.id)
+          return this.props.order === 'asc' ? 1 : -1
+        return 0
+      })
+
       return (
         <Fragment>
-          {/* <input type="text" onChange={this.handleInputChange} /> */}
           {this.props.loading
             ? <CircularProgress />
-            : <TableContainer>
+            : <TableContainer >
               <Table
                 aria-label="collapsible table"
-                style={{ minWidth: 550, overflow: 'hidden', width: 100 }}
+                style={{ maxWidth: 550, overflow: 'hidden', width: '100%', borderRadius: 15, margin: '0 auto'}}
               >
                 <EnhancedTableHead
-                  order={this.state.order}
+                  order={this.props.order}
                   tableHead={this.props.usersData[0]}
-                  onClick={this.sortClickHandler}
+                  onClick={() => this.sortClickHandler()}
                 />
-                <TableBody>
-                  {this.sortedData(this.props.usersData).map((row, index) => (
-                    row.username.toLowerCase().includes(this.state.search.toLowerCase().trim(' '))
+                <TableBody style={{background: '#fff'}}>
+                  {sorted.map((row, index) => (
+                    row.username.toLowerCase().includes(this.props.searchName.toLowerCase().trim(' '))
                       ? <EnhancedTableRow key={index} row={row} />
                       : null
                   ))}
@@ -81,16 +63,18 @@ class TableUsers extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        usersData: state.users.data,
-        loading: state.users.loading
-    }
+  return {
+    usersData: state.users.data,
+    loading: state.users.loading,
+    order: state.filter.direction
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        users: () => dispatch(users())
-    }
+  return {
+    users: () => dispatch(users()),
+    filter: order => dispatch(filter(order))
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableUsers);
