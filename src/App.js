@@ -22,7 +22,7 @@ class App extends Component {
           <Route path={'/login'} component={Auth} />
           <Route path={'/logout'} component={Logout} />
           <PrivateComponent path={'/users'} component={Users} auth={this.props.isAuthenticated} />
-          <Redirect from={'/'} to={'login'}/>
+          <Redirect from={'/'} to={'/login'}/>
         </Switch>
       </Layout>
     );

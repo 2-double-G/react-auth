@@ -24,13 +24,16 @@ class Users extends Component {
 
   render() {
       return (
-        <div className={classes.Users}>     
+        <div className={classes.Users}>
           {
             this.props.loading
-              ? <CircularProgress />
+              ? <CircularProgress
+                style={{ position: 'absolute', top: '50%', left: '50%' }}
+              />
               : <div>
                   <div>
                   <Input
+                      class={classes.input}
                       label='Search username'
                       value={this.props.serachName}
                       onChange={this.onChangeHandler}

@@ -1,4 +1,5 @@
 .Users {
+    position: relative;
     display: flex;
     flex-grow: 1;
     flex-direction: column;
@@ -9,18 +10,19 @@
 
 .Users > div > div {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap-reverse;
 }
 
-.Users button {
-    margin-bottom: 20px
+.input {
+    margin-bottom: 15px;
 }
 
 .Users a {
     display: block;
     text-decoration: none;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     padding: 5px 10px;
     border-radius: 10px;
     text-transform: uppercase;
