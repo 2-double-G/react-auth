@@ -59,9 +59,8 @@ export const authError = token => {
 	}
 }
 
-export const getToken = token => {
+export const getToken = () => {
 	return {
-		type: GET_TOKEN,
-		token
+		type: GET_TOKEN
 	}
 }
