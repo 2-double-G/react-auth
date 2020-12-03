@@ -55,8 +55,7 @@ export const logout = () => {
 
 export const authError = token => {
 	return {
-		type: AUTH_ERROR,
-		token
+		type: AUTH_ERROR
 	}
 }
 
