@@ -36,7 +36,7 @@ export const users = () => {
         })
       })
       
-      dispatch(fetchUserSucsess(prepareData, token))
+      dispatch(fetchUserSucsess(prepareData))
     } catch (error) {
       dispatch(fetchUserError());
       console.error(error);           
@@ -50,11 +50,10 @@ export const fetchUserStart = () => {
   }
 }
 
-export const fetchUserSucsess = (data, token) => {
+export const fetchUserSucsess = data => {
   return {
     type: FETCH_USERS_SUCCESS,
-    data,
-    token
+    data
   }
 }
 
