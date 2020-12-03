@@ -107,7 +107,7 @@ class Auth extends Component {
 
 				return (
 					<Input
-						key={controlName + index}
+						key={index}
 						label={control.label}
 						type={control.type}
 						value={control.value}
@@ -149,7 +149,7 @@ class Auth extends Component {
 				<Redirect to={'/users'} />
 			)
 		}
-		console.log(this.state.touched);
+	
 		return (
 				<div className={classes.Auth}>
 					<div>
