@@ -6,6 +6,7 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const FETCH_USERS_START = 'FETCH_USERS_START';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
+export const GET_TOKEN = 'GET_TOKEN';
 
 export const SEARCH_USERS = 'SEARCH_USERS';
 

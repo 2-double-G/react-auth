@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
-import Auth from './containers/Auth/Auth';
-import Layout from './hoc/Layout/Layout';
-import Users from './containers/Users/Users';
-import PrivateComponent from './components/PrivateComponent/PrivateComponent';
 import { connect } from 'react-redux';
-import { authStart } from './store/actions/auth';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+
+import Layout from './hoc/Layout/Layout';
+import Auth from './containers/Auth/Auth';
+import Users from './containers/Users/Users';
 import Logout from './components/Logout/Logout';
+import PrivateComponent from './components/PrivateComponent/PrivateComponent';
+
+import { getToken } from './store/actions/auth';
 
 class App extends Component {
   componentDidMount() {
@@ -35,7 +37,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		isToken: () => dispatch(authStart())
+		isToken: () => dispatch(getToken())
 	}
 }
 

@@ -3,13 +3,17 @@ import {
 	AUTH_START,
 	AUTH_SUCCESS,
 	AUTH_ERROR,
-	AUTH_LOGOUT
+	AUTH_LOGOUT,
+	GET_TOKEN
 } from './actionTypes';
 
 
 export const auth = (username, password) => {
 	return async dispatch => {
 		const authData = { username, password };
+
+		dispatch(authStart());
+
 		const url = 'api-token-auth/';
 		const instance = axios.create({
 			baseURL: 'https://emphasoft-test-assignment.herokuapp.com'
@@ -49,8 +53,16 @@ export const logout = () => {
 	}
 }
 
-export const authError = () => {
+export const authError = token => {
 	return {
-		type: AUTH_ERROR
+		type: AUTH_ERROR,
+		token
+	}
+}
+
+export const getToken = token => {
+	return {
+		type: GET_TOKEN,
+		token
 	}
 }

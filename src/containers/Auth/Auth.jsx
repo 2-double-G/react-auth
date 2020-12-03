@@ -7,12 +7,15 @@ import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { auth } from './../../store/actions/auth';
 
 class Auth extends Component {
 
 	state = {
 		isFormValid: false,
+		touched: false,
 		inputControls: {
 			userName: {
 				label: 'Username',
@@ -61,6 +64,7 @@ class Auth extends Component {
 	}
 
 	onChangeHandler = (event, controlName) => {
+
 		const inputControls = { ...this.state.inputControls };
 		const control = inputControls[controlName];
 		
@@ -78,11 +82,16 @@ class Auth extends Component {
 
 		this.setState({
 			isFormValid,
-			inputControls
+			touched: false,
+			inputControls,
 		})     
 	}
 
 	loginHandler = () => {
+		this.setState({
+			touched: true
+		})
+
 		this.props.auth(
 			this.state.inputControls.userName.value,
 			this.state.inputControls.password.value,
@@ -114,10 +123,20 @@ class Auth extends Component {
 	renderButton() {
 		return (
 			<Button
-				disabled={!this.state.isFormValid}
+				disabled={
+					this.props.loading
+					? true
+					: !this.state.isFormValid			
+				}
 				onClick={this.loginHandler}
 			>
-				Login
+				{
+					this.props.loading
+						? <CircularProgress
+								size={12}
+							/>
+						: 'Login'
+				}
 			</Button>
 		)
 	}
@@ -130,14 +149,14 @@ class Auth extends Component {
 				<Redirect to={'/users'} />
 			)
 		}
-
+		console.log(this.state.touched);
 		return (
 				<div className={classes.Auth}>
 					<div>
 						<form onSubmit={this.onSubmitHandler}>
 							<h1>Sign in</h1>
-							{
-								this.props.isError
+						{							
+								this.props.isError && this.state.touched
 									? <span className={classes.error}>Wrong username/password</span>
 									: null
 							}
@@ -153,7 +172,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
 	return {
 		isAuthenticated: !!state.auth.token,
-		isError: state.auth.isError
+		isError: state.auth.isError,
+		loading: state.auth.loading
 	}
 }
 

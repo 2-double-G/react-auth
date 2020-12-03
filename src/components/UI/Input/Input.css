@@ -1,5 +1,6 @@
 .Input {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    position: relative;
 }
 
 .Input label {
@@ -12,7 +13,7 @@
     box-sizing: border-box;
     width: 100%;
     padding: 8px;
-    border: 1px solid #1D3557;
+    border: 2px solid #1D3557;
     border-radius: 10px;
     outline: none;
 }
@@ -24,4 +25,6 @@
 .Input span {
     color: #e63946;
     font-weight: 600;
+    position: absolute;
+    top: 100%;
 }
