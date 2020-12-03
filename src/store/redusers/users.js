@@ -1,15 +1,12 @@
 import {
   FETCH_USERS_START,
   FETCH_USERS_SUCCESS,
-  FETCH_USERS_ERROR,
-  LOGOUT
+  FETCH_USERS_ERROR
 } from '../actions/actionTypes';
 
 const initialState = {
   data: [],
-  success: false,
-  loading: true,
-  token: null
+  loading: true
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -23,20 +20,12 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.data,
-        success: true,
-        loading: false,
-        token: action.token
+        loading: false
       }
     case FETCH_USERS_ERROR:
       return {
         ...state,
-        isError: true,
-        success: false
-      }
-    case LOGOUT:
-      return {
-        ...state,
-        token: null
+        isError: true
       }
     default:
       return state;

@@ -16,3 +16,15 @@
 .Users button {
     margin-bottom: 20px
 }
+
+.Users a {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 600;
+    background-color: #e63946;
+}

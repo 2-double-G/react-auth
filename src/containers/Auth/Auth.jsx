@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -123,8 +123,15 @@ class Auth extends Component {
 	}
 
 	render() {
+		const shouldRedirect = this.props.isAuthenticated;
+
+		if (shouldRedirect) {
+			return (
+				<Redirect to={'/users'} />
+			)
+		}
+
 		return (
-			<Fragment>
 				<div className={classes.Auth}>
 					<div>
 						<form onSubmit={this.onSubmitHandler}>
@@ -139,19 +146,13 @@ class Auth extends Component {
 						</form>
 					</div>
 				</div>
-				{
-					this.props.token
-						? <Redirect to={'/users'} />
-						: null
-				}
-			</Fragment>
 		)
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		token: state.auth.token,
+		isAuthenticated: !!state.auth.token,
 		isError: state.auth.isError
 	}
 }

@@ -1,7 +1,9 @@
 
 import {
+	AUTH_START,
 	AUTH_ERROR,
-	AUTH_SUCCESS
+	AUTH_SUCCESS,
+	AUTH_LOGOUT
 } from './../actions/actionTypes';
 
 const initialState = {
@@ -12,6 +14,11 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case AUTH_START:
+			return {
+				...state,
+				token: localStorage.getItem('token')
+			}
 		case AUTH_SUCCESS:
 			return {
 				...state,
@@ -24,6 +31,11 @@ export const authReducer = (state = initialState, action) => {
 				...state,
 				success: false,
 				isError: true
+			}
+		case AUTH_LOGOUT:
+			return {
+				...state,
+				token: null
 			}
 		default:
 			return state;

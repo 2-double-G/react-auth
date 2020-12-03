@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {
+	AUTH_START,
 	AUTH_SUCCESS,
-	AUTH_ERROR
+	AUTH_ERROR,
+	AUTH_LOGOUT
 } from './actionTypes';
 
 
@@ -27,10 +29,23 @@ export const auth = (username, password) => {
 	}
 }
 
+export const authStart = () => {
+	return {
+		type: AUTH_START
+	}
+}
+
 export const authSuccess = token => {
 	return {
 		type: AUTH_SUCCESS,
 		token
+	}
+}
+
+export const logout = () => {
+	localStorage.removeItem('token');
+	return {
+		type: AUTH_LOGOUT
 	}
 }
 

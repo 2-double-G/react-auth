@@ -2,8 +2,7 @@ import axios from 'axios';
 import {
   FETCH_USERS_START,
   FETCH_USERS_SUCCESS,
-  FETCH_USERS_ERROR,
-  LOGOUT
+  FETCH_USERS_ERROR
 } from "./actionTypes";
 
 
@@ -62,12 +61,5 @@ export const fetchUserSucsess = (data, token) => {
 export const fetchUserError = () => {
   return {
     type: FETCH_USERS_ERROR
-  }
-}
-
-export const logout = () => {
-  localStorage.removeItem('token');
-  return {
-    type: LOGOUT
   }
 }
