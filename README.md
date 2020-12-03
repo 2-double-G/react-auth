@@ -1,6 +1,6 @@
 # Description
 
-SPA with adaptive layout and user authentication with Validation.
+SPA with adaptive layout and user authentication with validation.
 
 Additionally displaying a list of users with filtering by username and sorting by ID
 
