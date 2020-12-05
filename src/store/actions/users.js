@@ -18,25 +18,19 @@ export const users = () => {
         const response = await axios.get(url, {headers: {
           Authorization: `Token ${token}`
         }});
-        const data = response.data;
-
-        const prepareData = [];
-
-        data.forEach(item => {
-          prepareData.push({
-            id: item.id,
-            username: item.username !== '' ? item.username : '-',
-            first_name: item.first_name !== '' ? item.first_name : '-',
-            last_name: item.last_name !== '' ? item.last_name : '-',
-            detail: {
-              is_active: item.is_active ? 'Active' : 'Not active',
-              last_login: item.last_login ? new Date(item.last_login).toLocaleString() : 'Unknown',
-              is_superuser: item.is_superuser ? 'Yes' : 'No'
-            }  
-        })
-      })
+        const data = response.data.map(item => ({
+          id: item.id,
+          username: item.username !== '' ? item.username : '-',
+          first_name: item.first_name !== '' ? item.first_name : '-',
+          last_name: item.last_name !== '' ? item.last_name : '-',
+          detail: {
+            is_active: item.is_active ? 'Active' : 'Not active',
+            last_login: item.last_login ? new Date(item.last_login).toLocaleString() : 'Unknown',
+            is_superuser: item.is_superuser ? 'Yes' : 'No'
+          }
+        }));
       
-      dispatch(fetchUserSucsess(prepareData, token))
+      dispatch(fetchUserSucsess(data))
     } catch (error) {
       dispatch(fetchUserError());
       console.error(error);           
@@ -50,11 +44,10 @@ export const fetchUserStart = () => {
   }
 }
 
-export const fetchUserSucsess = (data, token) => {
+export const fetchUserSucsess = data => {
   return {
     type: FETCH_USERS_SUCCESS,
-    data,
-    token
+    data
   }
 }
 
