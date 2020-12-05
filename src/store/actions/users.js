@@ -29,12 +29,8 @@ export const users = () => {
             is_superuser: item.is_superuser ? 'Yes' : 'No'
           }
         }));
-      
-<<<<<<< HEAD
-      dispatch(fetchUserSucsess(data))
-=======
-      dispatch(fetchUserSucsess(prepareData))
->>>>>>> 29241732b6b0758936e162977151ed583f4c0014
+
+      dispatch(fetchUserSucsess(data));
     } catch (error) {
       dispatch(fetchUserError());
       console.error(error);           

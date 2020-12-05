@@ -7,11 +7,7 @@ import {
 const initialState = {
   data: [],
   loading: true,
-<<<<<<< HEAD
   isErorr: false
-=======
-  isError: false
->>>>>>> 29241732b6b0758936e162977151ed583f4c0014
 }
 
 export const usersReducer = (state = initialState, action) => {
