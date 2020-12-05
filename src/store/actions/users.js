@@ -30,7 +30,11 @@ export const users = () => {
           }
         }));
       
+<<<<<<< HEAD
       dispatch(fetchUserSucsess(data))
+=======
+      dispatch(fetchUserSucsess(prepareData))
+>>>>>>> 29241732b6b0758936e162977151ed583f4c0014
     } catch (error) {
       dispatch(fetchUserError());
       console.error(error);           
