@@ -1,0 +1,32 @@
+.Users {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #f0e6ef;
+    padding: 20px;
+
+    > div > div {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap-reverse;
+        padding: 5px;
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+        padding: 8px 20px;
+        border-radius: 10px;
+        text-transform: uppercase;
+        color: #fff;
+        font-weight: 600;
+        background-color: #e63946;
+    }
+}
+
+.input {
+    margin-bottom: 0;
+}

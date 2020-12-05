@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import classes from './Auth.css';
+import classes from './Auth.module.scss';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';

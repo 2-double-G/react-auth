@@ -1,0 +1,29 @@
+$default-color: #ffffff;
+$enabled-color: #06d6a0;
+$disabled-color: #d8e2dc;
+$hover-color: #44eec1;
+
+.Button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: $enabled-color;
+    color: $default-color;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: background-color .5s;
+
+    &:enabled:hover {
+        background-color: $hover-color;
+    }
+
+    &:disabled {
+        background-color: $disabled-color;
+        cursor: not-allowed;
+    }
+}
+
+
+

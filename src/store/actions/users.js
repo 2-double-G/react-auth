@@ -23,11 +23,9 @@ export const users = () => {
           username: item.username !== '' ? item.username : '-',
           first_name: item.first_name !== '' ? item.first_name : '-',
           last_name: item.last_name !== '' ? item.last_name : '-',
-          detail: {
-            is_active: item.is_active ? 'Active' : 'Not active',
-            last_login: item.last_login ? new Date(item.last_login).toLocaleString() : 'Unknown',
-            is_superuser: item.is_superuser ? 'Yes' : 'No'
-          }
+          is_active: item.is_active ? 'Active' : 'Not active',
+          last_login: item.last_login ? new Date(item.last_login).toLocaleString() : 'Unknown',
+          is_superuser: item.is_superuser ? 'Yes' : 'No'
         }));
 
       dispatch(fetchUserSucsess(data));

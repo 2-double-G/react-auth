@@ -1,5 +1,6 @@
 import React from 'react';
-import classes from './Input.css';
+import PropTypes from 'prop-types';
+import classes from './Input.module.scss';
 
 const isInvalid = ({ valid, touched }) => {
   return !valid && touched;
@@ -33,6 +34,16 @@ const Input = props => {
       }
     </div>
   )
+}
+
+Input.propTypes = {
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+}
+
+Input.defaultProps = {
+  onChange: () => {},
+  value: '',
 }
 
 export default Input;

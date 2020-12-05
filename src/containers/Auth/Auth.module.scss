@@ -1,0 +1,48 @@
+.Auth {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    flex-grow: 1;
+    background-color: #f8edeb;
+    color: #1D3557;
+
+    > div {
+        width: 100%;
+        max-width: 400px;
+        padding: 0 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin: 0 0 60px;
+    }
+
+    form {
+        position: relative;
+        padding: 15px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: #ffffff;
+        box-shadow: 4px 6px 14px 0px rgba(0, 0, 0, 0.17);
+    }
+}
+
+.error {
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 5px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid #e63946;
+    background-color: #ffb6a7b2;
+
+    position: absolute;
+    top: 70px;
+    left: 15px;
+    right: 15px;
+
+    div {
+        position: relative;
+    }
+}

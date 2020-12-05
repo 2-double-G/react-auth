@@ -1,0 +1,94 @@
+$bg-color: #ffffff;
+$bg-color2: #f5f3f4;
+$primary-color: #f7a399;
+$light-color: #fff;
+$border-color: #ddd;
+$ff-primary: 'Poppins', sans-serif;
+
+@mixin break {
+  thead {
+    display: none;
+  }
+
+  tr {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  td {
+    display: block;
+    position: relative;
+    padding-left: 130px;
+    text-align: left;
+    border-bottom: 0;
+
+    &:last-child {
+      border-bottom: 1px solid $border-color;
+    }
+
+    &::before {
+      content: attr(data-heading);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 120px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      background-color: $primary-color;
+      color: $light-color;
+      font-weight: 700;
+      padding: 0 5px;
+      justify-content: center;
+    }
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.TableContainer {
+  width: 100%;
+  margin: 0 auto 40px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      background-color: $primary-color;
+      color: $light-color;
+      tr {
+        background-color: transparent;
+      }
+    }
+
+    td, th {
+      border: 1px solid $border-color;
+      padding: 10px;
+      text-align: center;
+    }
+
+    tr {
+      background-color: $bg-color2;
+      &:nth-child(even) {
+        background-color: $bg-color;
+      }
+    }
+      @media (max-width: 800px) {
+        @include break;
+      }
+  }
+
+  span {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e63946;
+    background-color: #ffb6a7b2;
+    text-align: center;
+  }
+}

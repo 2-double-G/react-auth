@@ -505,6 +505,9 @@ module.exports = function (webpackEnv) {
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
+                  modules: {
+                    localIdentName: '[name]__[local]--[hash:base64:5]',
+                  },
                   sourceMap: isEnvProduction
                     ? shouldUseSourceMap
                     : isEnvDevelopment,

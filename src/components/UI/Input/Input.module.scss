@@ -1,0 +1,33 @@
+$invalid-color: #e63946;
+$border-color: #1D3557;
+
+.Input {
+    margin-bottom: 40px;
+    position: relative;
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 8px;
+        border: 2px solid $border-color;
+        border-radius: 10px;
+        outline: none;
+    }
+
+    &.invalid input {
+        border: 2px solid $invalid-color;
+    }
+
+    span {
+        color: $invalid-color;
+        font-weight: 600;
+        position: absolute;
+        top: 100%;
+    }
+}
