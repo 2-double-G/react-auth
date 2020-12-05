@@ -1,5 +1,7 @@
-$invalid-color: #e63946;
-$border-color: #1D3557;
+$bg-color: #eff6fb;
+$shadow-color: #dee5e9;
+$default-color: #ffffff;
+$invalid-color: #fc001d;
 
 .Input {
     margin-bottom: 40px;
@@ -7,21 +9,24 @@ $border-color: #1D3557;
 
     label {
         display: block;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     input {
+        width: 100%;
         display: block;
         box-sizing: border-box;
-        width: 100%;
-        padding: 8px;
-        border: 2px solid $border-color;
-        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid #485696;
+        border-radius: 20px;
         outline: none;
+        background: $bg-color;
+        box-shadow: inset 5px 5px 9px $shadow-color, 
+            inset -5px -5px 9px $default-color;
     }
 
     &.invalid input {
-        border: 2px solid $invalid-color;
+        border: 1px solid $invalid-color;
     }
 
     span {

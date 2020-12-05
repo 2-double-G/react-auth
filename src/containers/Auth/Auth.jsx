@@ -133,7 +133,7 @@ class Auth extends Component {
 				{
 					this.props.loading
 						? <CircularProgress
-								size={12}
+								size={15}
 							/>
 						: 'Login'
 				}
@@ -157,7 +157,7 @@ class Auth extends Component {
 							<h1>Sign in</h1>
 						{							
 								this.props.isError && this.state.touched
-									? <span className={classes.error}>Wrong username/password</span>
+									? <span className={classes.error}>Wrong username or password</span>
 									: null
 							}
 							{this.renderInput()}

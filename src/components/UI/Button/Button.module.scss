@@ -15,6 +15,10 @@ $hover-color: #44eec1;
     outline: none;
     transition: background-color .5s;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &:enabled:hover {
         background-color: $hover-color;
     }

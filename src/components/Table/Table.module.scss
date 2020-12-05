@@ -1,8 +1,11 @@
-$bg-color: #ffffff;
-$bg-color2: #f5f3f4;
-$primary-color: #f7a399;
-$light-color: #fff;
+$bg-color: #eff6fb;
+$bg-color2: #e3ecfd;
+$primary-color: #788bff;
+$light-color: #ffffff;
+$shadow-color: #dee5e9;
 $border-color: #ddd;
+$error-color: #fc001d;
+$bg-error: #fcb1a68a;
 $ff-primary: 'Poppins', sans-serif;
 
 @mixin break {
@@ -18,7 +21,7 @@ $ff-primary: 'Poppins', sans-serif;
   td {
     display: block;
     position: relative;
-    padding-left: 130px;
+    padding-left: 110px;
     text-align: left;
     border-bottom: 0;
 
@@ -31,7 +34,7 @@ $ff-primary: 'Poppins', sans-serif;
       position: absolute;
       top: 0;
       left: 0;
-      width: 120px;
+      width: 100px;
       height: 100%;
       display: flex;
       align-items: center;
@@ -51,7 +54,12 @@ $ff-primary: 'Poppins', sans-serif;
 
 .TableContainer {
   width: 100%;
-  margin: 0 auto 40px;
+  margin: 20px auto 0;
+  overflow: hidden;
+  border-radius: 30px;
+  background: $bg-color;
+  box-shadow:  -5px -5px 6px $shadow-color, 
+               5px 5px 6px $bg-color;
 
   table {
     width: 100%;
@@ -72,23 +80,24 @@ $ff-primary: 'Poppins', sans-serif;
     }
 
     tr {
-      background-color: $bg-color2;
       &:nth-child(even) {
-        background-color: $bg-color;
+        background-color: $bg-color2;
       }
     }
       @media (max-width: 800px) {
         @include break;
       }
   }
+}
 
-  span {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #e63946;
-    background-color: #ffb6a7b2;
-    text-align: center;
-  }
+.errorMessage {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  color: $error-color;
+  border: 1px solid $error-color;
+  background-color: $bg-error;
+  text-align: center;
 }

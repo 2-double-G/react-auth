@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classes from './Table.module.scss';
 
@@ -21,6 +21,7 @@ const Table = props => {
   }
 
   return (
+    <Fragment>
       <div className={classes.TableContainer}>
         <table>
           <thead>
@@ -36,13 +37,15 @@ const Table = props => {
             {row}
           </tbody>
         </table>
-        {
-          isDataEmty(data)
-          ? <span>There is no such user</span>
-          : null
-        }
       </div>
-    )
+      
+      {
+          isDataEmty(data)
+            ? <span className={classes.errorMessage}>There is no such user</span>
+            : null
+        }
+    </Fragment>
+  )
 }
 
 Table.propTypes = {
