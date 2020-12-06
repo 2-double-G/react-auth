@@ -1,49 +1,57 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classes from './Input.module.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import classes from "./Input.module.scss";
 
-const isInvalid = ({ valid, touched }) => {
+const isInvalid = (valid, touched) => {
   return !valid && touched;
-}
+};
 
-const Input = props => {
-  const cls = [classes.Input, props.class];
-  const inputType = props.type || 'text';
-  const htmlFor = `${inputType} - ${Math.random()}`;
+const renderErrorMessage = (valid, touched, errorMessage) => {
+  return isInvalid(valid, touched) ? <span>{errorMessage}</span> : null;
+};
 
-  if (isInvalid(props)) {
-      cls.push(classes.invalid);
+const Input = ({ addClass, type, label, value, onChange, errorMessage, valid, touched }) => {
+  const cls = [classes.Input, addClass];
+  const htmlFor = `${type} - ${Math.random()}`;
+
+  if (isInvalid(valid, touched)) {
+    cls.push(classes.invalid);
   }
 
   return (
-    <div className={cls.join(' ')}>
-      <label htmlFor={htmlFor}>
-        {props.label}
-      </label>
+    <div className={cls.join(" ")}>
+      <label htmlFor={htmlFor}>{label}</label>
       <input
-        type={inputType}
+        type={type}
         name={htmlFor}
-        value={props.value}
-        onChange={props.onChange}
+        value={value}
+        onChange={onChange}
       />
-      
-      {
-        isInvalid(props)
-          ? <span>{props.errorMessage}</span>
-          : null
-      }
+      {renderErrorMessage(valid, touched, errorMessage)}
     </div>
-  )
-}
+  );
+};
 
 Input.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
-}
+  addClass: PropTypes.string,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  errorMessage: PropTypes.string,
+  valid: PropTypes.bool,
+  touched: PropTypes.bool,
+};
 
 Input.defaultProps = {
   onChange: () => {},
-  value: '',
-}
+  value: "",
+  addClass: "",
+  type: "text",
+  label: "",
+  errorMessage: "",
+  valid: true,
+  touched: false,
+};
 
 export default Input;

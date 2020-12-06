@@ -10,7 +10,6 @@ const PrivateComponent = ({ component: Component, auth, ...rest }) => (
         state: {from: props.location}
       }}/>
   )}
-  
   />
 );
 

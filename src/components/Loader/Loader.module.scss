@@ -1,0 +1,50 @@
+$border-color: #5e60ce;
+
+%center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin setSize($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin loader($borderSize) {
+  content: " ";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: $borderSize solid $border-color;
+  border-color: $border-color transparent $border-color transparent;
+  animation: lds-dual-ring 1s linear infinite;
+}
+
+.Loader {
+  display: inline-block;
+  
+  @include setSize(65px);
+  @extend %center;
+  &:after {
+   @include loader(6px);
+  }
+}
+
+.mini .Loader {
+  @include setSize(15px);
+  &:after {
+   @include loader(2px);
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

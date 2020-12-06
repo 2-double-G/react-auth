@@ -1,7 +1,7 @@
 import { FILTER_USERS } from "../actions/actionTypes";
 
 const initialState = {
-    direction: 'asc'
+  direction: "asc",
 };
 
 export const filterReducer = (state = initialState, action) => {
@@ -9,9 +9,9 @@ export const filterReducer = (state = initialState, action) => {
     case FILTER_USERS:
       return {
         ...state,
-        direction: action.order
-      }
+        direction: action.order,
+      };
     default:
       return state;
   }
-}
+};

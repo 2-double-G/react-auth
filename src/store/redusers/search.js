@@ -1,6 +1,6 @@
 import { SEARCH_USERS } from "../actions/actionTypes";
 
-const initialState = '';
+const initialState = "";
 
 export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -9,4 +9,4 @@ export const searchReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

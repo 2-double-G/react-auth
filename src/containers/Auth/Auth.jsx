@@ -1,186 +1,127 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-import classes from './Auth.module.scss';
+import classes from "./Auth.module.scss";
 
-import Input from '../../components/UI/Input/Input';
-import Button from '../../components/UI/Button/Button';
+import Input from "../../components/UI/Input/Input";
+import Button from "../../components/UI/Button/Button";
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-
-import { auth } from './../../store/actions/auth';
+import { auth } from "./../../store/actions/auth";
+import Loader from "../../components/Loader/Loader";
+import { pushButton, showFormState } from "./../../store/actions/form";
+import { inputValidation } from "../../form/formFramework";
+import { validateForm } from "./../../form/formFramework";
 
 class Auth extends Component {
+  onSubmitHandler = (event) => {
+    event.preventDefault();
+  };
 
-	state = {
-		isFormValid: false,
-		touched: false,
-		inputControls: {
-			userName: {
-				label: 'Username',
-				value: '',
-				valid: false,
-				touced: false,
-				validation: { // rules for validation
-					required: true,
-					minLength: 1
-				},
-				errorMessage: 'Enter username'
-			},
-			password: {
-				type: 'password',
-				label: 'Password',
-				value: '',
-				valid: false,
-				touched: false,
-				validation: {
-					required: true,
-					minLength: 1
-				},
-				errorMessage: 'Enter password'
-				},
-			}
-	}
+  onChangeHandler = (event, controlName) => {
+    const { isButtonTouched, changeFormState } = this.props;
+    const inputControls = { ...this.props.formState.inputControls };
+    const control = inputControls[controlName];
 
-	onSubmitHandler = event => {
-		event.preventDefault()
-	}
+    control.touched = true;
+    control.value = event.target.value;
+    control.valid = inputValidation(control.validation, control.value);
 
-	inputValidation = (validation, value) => {
-		if (!validation) return true;
+    inputControls[controlName] = control;
 
-		let isValid = true;
+    isButtonTouched(false);
+    changeFormState({
+      isFormValid: validateForm(inputControls),
+      inputControls,
+    });
+  };
 
-		if (validation.minLength) {
-			isValid = isValid && value.length >= validation.minLength;
-		}
+  loginHandler = () => {
+    const { auth, isButtonTouched } = this.props;
+    const username = this.props.formState.inputControls.username.value;
+    const password = this.props.formState.inputControls.password.value;
 
-		if (validation.required) {
-			isValid = isValid && value.trim() !== '';
-		}
+    isButtonTouched(true);
+    auth(username, password);
+  };
 
-		return isValid;
-	}
+  renderInput() {
+    const inputControls = { ...this.props.formState.inputControls };
 
-	onChangeHandler = (event, controlName) => {
+    return Object.keys(inputControls).map((controlName, index) => {
+      const { label, type, value, errorMessage, valid, touched } = inputControls[controlName];
 
-		const inputControls = { ...this.state.inputControls };
-		const control = inputControls[controlName];
-		
-		let isFormValid = true;
-		
-		control.touched = true;
-		control.value = event.target.value;
-		control.valid = this.inputValidation(control.validation, control.value);
+      return (
+        <Input
+          key={index}
+          label={label}
+          type={type}
+          value={value}
+          onChange={(event) => this.onChangeHandler(event, controlName)}
+          errorMessage={errorMessage}
+          valid={valid}
+          touched={touched}
+        />
+      );
+    });
+  }
 
-		inputControls[controlName] = control;
+  renderButton() {
+    const { loading } = this.props;
+    const isFormValid = this.props.formState.isFormValid;
+    const disabled = loading || !isFormValid;
 
-		Object.keys(inputControls).forEach(inputName => {
-			isFormValid = isFormValid && inputControls[inputName].valid;
-		})
+    return (
+      <Button disabled={disabled} onClick={this.loginHandler}>
+        {loading ? <Loader variant="mini" /> : "Login"}
+      </Button>
+    );
+  }
 
-		this.setState({
-			isFormValid,
-			touched: false,
-			inputControls,
-		})     
-	}
+  renderErrorMessage(isError, touched) {
+		return isError && touched
+			? <span className={classes.error}>Wrong username or password</span>
+			: null
+  }
 
-	loginHandler = () => {
-		this.setState({
-			touched: true
-		})
+  render() {
+    const { isAuthenticated, isError } = this.props;
+    const touched = this.props.formState.touchedButton;
+    
+    if (isAuthenticated) {
+      return <Redirect to="/users" />;
+    }
 
-		this.props.auth(
-			this.state.inputControls.userName.value,
-			this.state.inputControls.password.value,
-		)
-	}
-
-	renderInput() {
-		const inputControls = { ...this.state.inputControls };
-		
-		return (
-			Object.keys(inputControls).map((controlName, index) => {
-				const control = inputControls[controlName];
-
-				return (
-					<Input
-						key={index}
-						label={control.label}
-						type={control.type}
-						value={control.value}
-						onChange={event => this.onChangeHandler(event, controlName)}
-						errorMessage={control.errorMessage}
-						valid={control.valid}
-						touched={control.touched}
-					/>)
-			})
-		)
-	}
-
-	renderButton() {
-		return (
-			<Button
-				disabled={
-					this.props.loading
-					? true
-					: !this.state.isFormValid			
-				}
-				onClick={this.loginHandler}
-			>
-				{
-					this.props.loading
-						? <CircularProgress
-								size={15}
-							/>
-						: 'Login'
-				}
-			</Button>
-		)
-	}
-
-	render() {
-		const shouldRedirect = this.props.isAuthenticated;
-
-		if (shouldRedirect) {
-			return (
-				<Redirect to={'/users'} />
-			)
-		}
-	
-		return (
-				<div className={classes.Auth}>
-					<div>
-						<form onSubmit={this.onSubmitHandler}>
-							<h1>Sign in</h1>
-						{							
-								this.props.isError && this.state.touched
-									? <span className={classes.error}>Wrong username or password</span>
-									: null
-							}
-							{this.renderInput()}
-							{this.renderButton()}
-						</form>
-					</div>
-				</div>
-		)
-	}
+    return (
+      <div className={classes.Auth}>
+        <div>
+          <form onSubmit={this.onSubmitHandler}>
+            <h1>Sign in</h1>
+            {this.renderErrorMessage(isError, touched)}
+            {this.renderInput()}
+            {this.renderButton()}
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = state => {
-	return {
-		isAuthenticated: !!state.auth.token,
-		isError: state.auth.isError,
-		loading: state.auth.loading
-	}
-}
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: !!state.auth.token,
+    isError: state.auth.isError,
+    loading: state.auth.loading,
+    formState: state.form,
+  };
+};
 
-const mapDispatchToProps = dispatch => {
-	return {
-		auth: (email, password) => dispatch(auth(email, password))
-	}
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    auth: (email, password) => dispatch(auth(email, password)),
+    changeFormState: (formState) => dispatch(showFormState(formState)),
+    isButtonTouched: (touched) => dispatch(pushButton(touched)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

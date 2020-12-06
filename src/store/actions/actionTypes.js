@@ -1,13 +1,16 @@
-export const AUTH_START = 'AUTH_START';
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-export const FETCH_USERS_START = 'FETCH_USERS_START';
-export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
-export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
-export const GET_TOKEN = 'GET_TOKEN';
+export const FETCH_USERS_START = "FETCH_USERS_START";
+export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+export const FETCH_USERS_ERROR = "FETCH_USERS_ERROR";
+export const GET_TOKEN = "GET_TOKEN";
 
-export const SEARCH_USERS = 'SEARCH_USERS';
+export const SEARCH_USERS = "SEARCH_USERS";
 
-export const FILTER_USERS = 'FILTER_USERS';
+export const FILTER_USERS = "FILTER_USERS";
+
+export const SHOW_FORM_STATE = "SHOW_FORM_STATE";
+export const PUSH_BUTTON = "PUSH_BUTTON";
