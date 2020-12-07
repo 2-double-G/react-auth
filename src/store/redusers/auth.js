@@ -19,6 +19,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+        isError: false,
       };
     case AUTH_SUCCESS:
       return {
